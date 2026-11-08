@@ -4,6 +4,8 @@ module com.desarrollo.proyectohibernateg3 {
     requires jakarta.persistence;
 
 
-    opens com.desarrollo.proyectohibernateg3 to javafx.fxml;
+    opens com.desarrollo.proyectohibernateg3.controller to javafx.fxml;
+    opens com.desarrollo.proyectohibernateg3.model;
+
     exports com.desarrollo.proyectohibernateg3;
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "libro", schema = "catalogos")
+@Table(name = "libro", schema = "catalogo")
 public class Libro {
 
     @Id
@@ -19,22 +19,20 @@ public class Libro {
     @Column(name = "autor", nullable = false, length = 100)
     private String autor;
 
-    @Column(name = "anio_publicaciones", nullable = false)
-    private int anioPublicaciones;
+    @Column(name = "anio_publicacion", nullable = false)
+    private int anioPublicacion;
 
-    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
+    @Column(name = "precio", nullable = false, precision = 12, scale = 2)
     private BigDecimal precio;
 
-    public Libro(int id, String titulo, String autor, int anioPublicaciones, BigDecimal precio) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.anioPublicaciones = anioPublicaciones;
-        this.precio = precio;
+    public Libro() {
     }
 
-    public Libro() {
-
+    public Libro(String titulo, String autor, int anioPublicacion, BigDecimal precio) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anioPublicacion = anioPublicacion;
+        this.precio = precio;
     }
 
     public int getId() {
@@ -62,11 +60,11 @@ public class Libro {
     }
 
     public int getAnioPublicaciones() {
-        return anioPublicaciones;
+        return anioPublicacion;
     }
 
-    public void setAnioPublicaciones(int anioPublicaciones) {
-        this.anioPublicaciones = anioPublicaciones;
+    public void setAnioPublicaciones(int anioPublicacion) {
+        this.anioPublicacion = anioPublicacion;
     }
 
     public BigDecimal getPrecio() {
