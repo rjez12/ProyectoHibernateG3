@@ -1,7 +1,10 @@
 package com.desarrollo.proyectohibernateg3.controller;
+import com.desarrollo.proyectohibernateg3.dao.CategoriaDAO;
 import com.desarrollo.proyectohibernateg3.dao.LibroDAO;
+import com.desarrollo.proyectohibernateg3.model.Categoria;
 import com.desarrollo.proyectohibernateg3.model.Libro;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -32,6 +35,9 @@ public class LibroController {
     private Button btnEliminar;
 
     @FXML
+    private ComboBox<Categoria> cmbCategoria;
+
+    @FXML
     private TableView<Libro> tablaLibros;
 
     @FXML
@@ -49,13 +55,25 @@ public class LibroController {
     @FXML
     private TableColumn<Libro, BigDecimal> colPrecio;
 
-    private final LibroDAO libroDAO = new LibroDAO();
+    @FXML
+    private TableColumn<Libro, String> colCategoria;
 
+    private final LibroDAO libroDAO = new LibroDAO();
+    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
     // null indica que no hay un libro seleccionado.
     private Integer idSeleccionado;
 
     @FXML
     public void initialize() {
+        colCategoria.setCellValueFactory(data -> {
+            Categoria categoria = data.getValue().getCategoria();
+
+            String nombre = categoria != null
+                    ? categoria.getNombre()
+                    : "Sin categoria";
+
+            return new SimpleStringProperty(nombre);
+        });
         colId.setCellValueFactory(
                 new PropertyValueFactory<>("id")
         );
@@ -91,6 +109,23 @@ public class LibroController {
         cargarLibros();
     }
 
+    @FXML
+    private void cargarCategoria() {
+        try {
+            categoriaDAO.listar();
+
+            cmbCategoria.setItems(
+                    FXCollections.observableArrayList()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(
+                    Alert.AlertType.ERROR,
+                    "Alerta",
+                    "No se pudieron cargar las categorias"
+            );
+        }
+    }
     private void seleccionarLibro(Libro libro) {
         idSeleccionado = libro.getId();
 

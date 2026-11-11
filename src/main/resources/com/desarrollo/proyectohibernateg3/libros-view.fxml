@@ -28,6 +28,9 @@
         <Label text="Precio:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
 
         <TextField fx:id="txtPrecio" promptText="Precio del libro" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <ComboBox fx:id="cmbCategoria" onAction="#cargarCategoria" prefWidth="220.0" promptText="Seleccione una categoría" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label text="Categoria" GridPane.rowIndex="4" />
         <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />
@@ -37,6 +40,7 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
+         <RowConstraints />
         </rowConstraints>
     </GridPane>
 
@@ -65,6 +69,7 @@
             <TableColumn fx:id="colAnio" prefWidth="90.0" text="Año" />
 
             <TableColumn fx:id="colPrecio" prefWidth="100.0" text="Precio" />
+            <TableColumn fx:id="colCategoria" prefWidth="100.0" text="Categoria" />
         </columns>
     </TableView>
 
